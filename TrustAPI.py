@@ -1,4 +1,3 @@
-#!flask/bin/python
 from flask import Flask, jsonify
 
 app = Flask(__name__)
@@ -6,11 +5,11 @@ app = Flask(__name__)
 tasks = [
     {
         'id': 1,
-        'JWT': u''
+        'JWT': u'test'
     }
 ]
 #Need to impement PUT. The Handler will pass JWT here.
-@app.route('/todo/api/v1.0/tasks', methods=['PUT'])
+@app.route('/todo/api/v1.0/tasks', methods=['GET'])
 def update_task(task_id):
     task = [task for task in tasks if task['id'] == task_id]
     if len(task) == 0:
