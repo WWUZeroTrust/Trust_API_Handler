@@ -8,8 +8,8 @@ tasks = [
         'JWT': u'test'
     }
 ]
-#Need to impement PUT. The Handler will pass JWT here.
-@app.route('/todo/api/v1.0/tasks', methods=['GET'])
+#Need to implement PUT. The Handler will pass JWT here.
+@app.route('/todo/api/v1.0/tasks', methods=['PUT'])
 def update_task(task_id):
     task = [task for task in tasks if task['id'] == task_id]
     if len(task) == 0:
