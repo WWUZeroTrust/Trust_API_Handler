@@ -6,9 +6,10 @@ app = Flask(__name__)
 tasks = [
     {
         'id': 1,
-        'User': u'test'
+        'value': u'test'
     }
 ]
+
 #Need to implement PUT. The Handler will pass JWT here.
 @app.route('/<int:task_id>', methods=['GET', 'PUT'])
 def update_task(task_id):
@@ -21,10 +22,8 @@ def update_task(task_id):
         abort(404)
     if not request.json:
         abort(400)
-    if 'JWT' in request.json and type(request.json['JWT']) != unicode:
-        abort(400)
     
-    tasks[0]['JWT'] = request.json.get('JWT', tasks[0]['JWT'])
+    tasks[0]['value'] = request.json.get('value', tasks[0]['value'])
     return jsonify({'tasks': tasks[0]})
 
 @app.errorhandler(404)
@@ -35,4 +34,8 @@ if __name__ == "__main__":
     app.run(debug=True)
 
 #Query Command
-# curl -i -H "Content-Type: application/json" -X PUT -d '{"User":VALUE}' http://localhost:5000/1
+# curl -i -H "Content-Type: application/json" -X PUT -d "{\"JWT\":\"VALUE\"}" http://localhost:5000/1
+
+# curl -i http://localhost:5000/1
+
+
