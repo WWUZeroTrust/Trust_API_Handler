@@ -3,6 +3,7 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
+
 tasks = [
     {
         'id': 1,
@@ -31,6 +32,7 @@ def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 if __name__ == "__main__":
+    app.run(port=5001)
     app.run(debug=True)
 
 #Query Command
