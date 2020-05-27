@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 import requests
+import time
 
 
 app = Flask(__name__)
@@ -12,6 +13,7 @@ tasks = [
     }
 ]
 def get_username(user):
+    #When function is called. Send signal that new score needs to be calculated.
     print("passed user: %s" %user)
 
 def pass_score(score):
@@ -24,7 +26,6 @@ def pass_score(score):
 
     return requests.put('http://192.168.1.103:5000/2', headers=headers, data=data)
 
-pass_score(65)
 
 @app.route('/<int:task_id>', methods=['GET', 'PUT'])
 def update_task(task_id):
@@ -45,6 +46,8 @@ def update_task(task_id):
     #time.sleep(5)
     return jsonify({'tasks': tasks[0]})
 
+time.sleep(5)
+pass_score(95)
 
 @app.errorhandler(404)
 def not_found(error):
